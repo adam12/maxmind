@@ -1,0 +1,7 @@
+= maxmind
+
+Description goes here.
+
+== Copyright
+
+Copyright (c) 2009 Adam. See LICENSE for details.

@@ -1,0 +1,1 @@
+distance=;countryMatch=;countryCode=;freeMail=;anonymousProxy=;score=;binMatch=Yes;binCountry=;err=License Key Required - visit http://www.maxmind.com/app/ccv2r_signup for free signup;proxyScore=;spamScore=;binName=;ip_isp=;ip_org=;binNameMatch=;binPhoneMatch=;binPhone=;custPhoneInBillingLoc=;highRiskCountry=;queriesRemaining=;cityPostalMatch=;shipCityPostalMatch=;maxmindID=

@@ -8,7 +8,8 @@ begin
     gem.summary = %Q{TODO}
     gem.email = "adam@mediadrive.ca"
     gem.homepage = "http://github.com/adam12/maxmind"
-    gem.authors = ["Adam"]
+    gem.authors = ["Adam Daniels"]
+    gem.add_dependency('httparty')
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 

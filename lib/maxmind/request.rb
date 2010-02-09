@@ -55,7 +55,7 @@ module Maxmind
       if string == false
         return get(query.reject {|k, v| v.nil? }.to_query)    
       else
-        return query.reject {|k, v| v.nil? }.to_params
+        return query.reject {|k, v| v.nil? }.to_query
       end
     end
     

@@ -5,15 +5,8 @@ Interfaces with Maxmind's minFraud anti-fraud service.
 
 Installation
 ------------
-	gem install adam12-maxmind --source=http://gems.github.com
+	sudo gem install hackedunit-maxmind --source=http://gemcutter.org
 	
-
-Dependencies
-------------
-* [httparty](http://github.com/jnunemaker/httparty/)
-* [shoulda](http://github.com/thoughtbot/shoulda/) (used in tests only)
-* [matchy](http://github.com/jeremymcanally/matchy/) (used in tests only)
-
 
 Usage
 -----

@@ -4,15 +4,14 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "maxmind"
-    gem.summary = %Q{TODO}
-    gem.email = "adam@mediadrive.ca"
-    gem.homepage = "http://github.com/adam12/maxmind"
-    gem.authors = ["Adam Daniels"]
-    gem.add_dependency 'httparty'
+    gem.name = "hackedunit-maxmind"
+    gem.summary = "MaxMind Minfraud using Net::HTTP"
+    gem.email = "tinu@tinucleatus.com"
+    gem.homepage = "http://github.com/hackedunit/maxmind"
+    gem.authors = ["Adam Daniels", "Tinu Cleatus"]
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
-
+  Jeweler::GemcutterTasks.new
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
 end

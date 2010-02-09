@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "examples/example.rb",
+     "hackedunit-maxmind.gemspec",
      "lib/maxmind.rb",
      "lib/maxmind/request.rb",
      "lib/maxmind/response.rb",

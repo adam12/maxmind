@@ -53,14 +53,18 @@ module Maxmind
       
       query = required_fields.merge(optional_fields)
       if string == false
-        return get(query.reject {|k, v| v.nil? })    
+        return get(query.reject {|k, v| v.nil? }.to_query)    
       else
         return query.reject {|k, v| v.nil? }.to_params
       end
     end
     
     def get(query)
-      response = HTTParty.get('http://minfraud3.maxmind.com/app/ccv2r', :query => query)
+      url = URI.parse("https://minfraud1.maxmind.com/app/ccv2r")
+      req = Net::HTTP::Get.new("#{url.path}?#{query}")
+      h = Net::HTTP.new(url.host, url.port)
+      h.use_ssl = true
+      response = h.start { |http| http.request(req) }
       return response.body
     end
     

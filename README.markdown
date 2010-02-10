@@ -8,6 +8,12 @@ Installation
 	sudo gem install hackedunit-maxmind --source=http://gemcutter.org
 	
 
+Dependencies
+------------
+* [shoulda](http://github.com/thoughtbot/shoulda/) (used in tests only)
+* [matchy](http://github.com/jeremymcanally/matchy/) (used in tests only)
+
+
 Usage
 -----
 

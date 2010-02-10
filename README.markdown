@@ -19,7 +19,8 @@ Usage
 
 ### Minimum Required ###
 These are the only required fields to acquire a response from Maxmind.
-
+  
+  require 'maxmind'
 	request = Maxmind::Request.new('LICENSE_KEY',
 		:client_ip => '24.24.24.24',
 		:city => 'New York',
@@ -34,6 +35,7 @@ These are the only required fields to acquire a response from Maxmind.
 For increased accuracy, these are the recommended fields to submit to Maxmind. The additional
 fields here are optional and can be all or none.
 
+  require 'maxmind'
 	request = Maxmind::Request.new('LICENSE_KEY',
 		:client_ip => '24.24.24.24',
 		:city => 'New York',
@@ -51,6 +53,7 @@ fields here are optional and can be all or none.
 
 ### Thorough ###
 
+  require 'maxmind'
 	request = Maxmind::Request.new('LICENSE_KEY',
 		:client_ip => '24.24.24.24',
 		:city => 'New York',

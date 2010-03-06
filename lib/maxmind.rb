@@ -1,4 +1,4 @@
-require 'rubygems'
+# require 'rubygems'
 require 'active_support'
 require 'net/http'
 require 'net/https'

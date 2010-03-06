@@ -1,23 +1,79 @@
 module Maxmind
+  # Your license key
+  mattr_accessor :license_key
+  
   class Request
+    # optionally set a default request type (one of 'standard' or 'premium')
+    #   Maxmind's default behavior is to use premium if you have credits, else use standard
+    mattr_accessor :default_request_type
+    
+    
     # Required Fields
-    attr_accessor :client_ip, :city, :region, :postal, :country, :license_key
+    attr_accessor :client_ip, :city, :region, :postal, :country
     
     # Optional Fields
-    attr_accessor :domain, :bin, :bin_name, :bin_phone, :cust_phone, :requested_type,
+    attr_accessor :domain, :bin, :bin_name, :bin_phone, :cust_phone, :request_type,
       :forwarded_ip, :email, :username, :password, :transaction_id, :session_id,
       :shipping_address, :shipping_city, :shipping_region, :shipping_postal,
       :shipping_country, :user_agent, :accept_language
     
-    def initialize(license_key, options = {}) 
-      @license_key = license_key
-      
-      options.each do |k, v|
-        self.instance_variable_set("@#{k}", v)
+    def initialize(attrs={}) 
+      self.attributes = attrs
+    end
+    
+    
+    def attributes=(attrs={})
+      attrs.each do |k, v|
+        self.send("#{k}=", v)
       end
     end
     
-    def query(string = false)
+    
+    # email domain ... if a full email is provided, take just the domain portion
+    def domain=(email)
+      @domain = if email =~ /@(.+)/
+        $1
+      else
+        email
+      end
+    end
+    
+    # customer email ... sends just an MD5 hash of the email.
+    # also sets the email domain at the same time.
+    def email=(email)
+      @email = Digest::MD5.hexdigest(email.downcase)
+      self.domain = email unless domain
+    end
+    
+    def username=(username)
+      @username = Digest::MD5.hexdigest(username.downcase)
+    end
+    
+    def password=(password)
+      @password = Digest::MD5.hexdigest(password.downcase)
+    end
+    
+    # if a full card number is passed, grab just the first 6 digits (which is the bank id number)
+    def bin=(bin)
+      @bin = bin ? bin[0,6] : nil
+    end
+    
+    
+    def process!
+      resp = post(query)
+      Maxmind::Response.new(resp)
+    end
+    
+    def process
+      process!
+    rescue Exception => e
+      false
+    end
+    
+    
+    private
+    
+    def query
       validate
       
       required_fields = {
@@ -26,7 +82,7 @@ module Maxmind
         :region           => @region,
         :postal           => @postal,
         :country          => @country,
-        :license_key      => @license_key
+        :license_key      => Maxmind::license_key
       }
       
       optional_fields = {
@@ -35,7 +91,7 @@ module Maxmind
         :binName          => @bin_name,
         :binPhone         => @bin_phone,
         :custPhone        => @cust_phone,
-        :requested_type   => @requested_type,
+        :requested_type   => @request_type || @@default_request_type,
         :forwardedIP      => @forwarded_ip,
         :emailMD5         => @email,
         :usernameMD5      => @username,
@@ -51,43 +107,38 @@ module Maxmind
         :accept_language  => @accept_langage
       }
       
-      query = required_fields.merge(optional_fields)
-      if string == false
-        return get(query.reject {|k, v| v.nil? }.to_query)    
-      else
-        return query.reject {|k, v| v.nil? }.to_query
-      end
+      field_set = required_fields.merge(optional_fields)
+      field_set.reject {|k, v| v.nil? }#.to_query
     end
     
-    def get(query)
-      url = URI.parse("https://minfraud1.maxmind.com/app/ccv2r")
-      req = Net::HTTP::Get.new("#{url.path}?#{query}")
+    # Upon a failure at the first URL, will automatically retry with the second one before finally raising an exception
+    def post(query_params)
+      servers ||= ["https://minfraud1.maxmind.com/app/ccv2r", "https://minfraud3.maxmind.com/app/ccv2r"]
+      url = URI.parse(servers.shift)
+      
+      # req = Net::HTTP::Get.new("#{url.path}?#{query_string}")
+      req = Net::HTTP::Post.new("#{url.path}")
+      req.set_form_data(query_params)
       h = Net::HTTP.new(url.host, url.port)
       h.use_ssl = true
       response = h.start { |http| http.request(req) }
-      return response.body
+      response.body
+      
+    rescue Exception => e
+      retry if servers.size > 0
+      raise e
     end
     
-    def email=(email)
-      @email = Digest::MD5.hexdigest(email.downcase)
-    end
     
-    def username=(username)
-      @username = Digest::MD5.hexdigest(username.downcase)
-    end
-    
-    def password=(password)
-      @password = Digest::MD5.hexdigest(password.downcase)
-    end
     
     protected
     def validate
-      raise ArgumentError, 'license key required' if @license_key.nil?
-      raise ArgumentError, 'IP address required' if @client_ip.nil?
-      raise ArgumentError, 'city required' if @city.nil?
-      raise ArgumentError, 'region required' if @region.nil?
-      raise ArgumentError, 'postal code required' if @postal.nil?
-      raise ArgumentError, 'country required' if @country.nil?
+      raise ArgumentError, 'License key is required' unless Maxmind::license_key
+      raise ArgumentError, 'IP address is required' unless client_ip
+      raise ArgumentError, 'City is required' unless city
+      raise ArgumentError, 'Region is required' unless region
+      raise ArgumentError, 'Postal code is required' unless postal
+      raise ArgumentError, 'Country is required' unless country
     end
   end
 end

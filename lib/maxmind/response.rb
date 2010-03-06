@@ -10,7 +10,7 @@ module Maxmind
       :maxmind_id, :error, :response
   
     def initialize(response = nil)
-      raise ArgumentError, 'need a valid response string' if response.nil?
+      raise ArgumentError, 'Missing response string' unless response
     
       parse(response)
       @attributes = attributes_from_response

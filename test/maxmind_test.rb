@@ -21,7 +21,7 @@ OPTIONAL_FIELDS = {
   :bin_name => 'MBNA America Bank',
   :bin_phone => '800-421-2110',
   :cust_phone => '212-242',
-  :requested_type => 'premium',
+  :request_type => 'premium',
   :shipping_address => '145-50 157th Street',
   :shipping_city => 'Jamaica',
   :shipping_region => 'NY',
@@ -36,33 +36,34 @@ OPTIONAL_FIELDS = {
 class MaxmindTest < Test::Unit::TestCase
   context "New Request object" do
     setup do
-      @request = Maxmind::Request.new('key', REQUIRED_FIELDS)
+      Maxmind.license_key = 'key'
+      @request = Maxmind::Request.new(REQUIRED_FIELDS)
     end
     
     should "require a key" do
-      lambda { Maxmind::Request.new }.should raise_error(ArgumentError)
-      
-      Maxmind::Request.new('key').license_key.should == 'key'
+      Maxmind.license_key = nil
+      lambda { @request.send(:validate) }.should raise_error(ArgumentError)
+      Maxmind.license_key = 'key'
     end
     
     should "require client IP" do
-      lambda { @request.client_ip = nil; @request.query }.should raise_error(ArgumentError)
+      lambda { @request.client_ip = nil; @request.send(:validate) }.should raise_error(ArgumentError)
     end
     
     should "require city" do
-      lambda { @request.city = nil; @request.query }.should raise_error(ArgumentError)
+      lambda { @request.city = nil; @request.send(:validate) }.should raise_error(ArgumentError)
     end
     
     should "require region" do
-      lambda { @request.region = nil; @request.query }.should raise_error(ArgumentError)
+      lambda { @request.region = nil; @request.send(:validate) }.should raise_error(ArgumentError)
     end
     
     should "require postal" do
-      lambda { @request.postal = nil; @request.query }.should raise_error(ArgumentError)
+      lambda { @request.postal = nil; @request.send(:validate) }.should raise_error(ArgumentError)
     end
     
     should "require country" do
-      lambda { @request.country = nil; @request.query }.should raise_error(ArgumentError)
+      lambda { @request.country = nil; @request.send(:validate) }.should raise_error(ArgumentError)
     end
     
     should "convert username to MD5" do
@@ -92,10 +93,11 @@ class MaxmindTest < Test::Unit::TestCase
   
   context "Response" do
     setup do
-      request = Maxmind::Request.new('LICENSE_KEY', REQUIRED_FIELDS.merge(RECOMMENDED_FIELDS).merge(OPTIONAL_FIELDS))     
-      FakeWeb.register_uri(:get, "https://minfraud1.maxmind.com/app/ccv2r?" + request.query(true), :body => File.read(File.join(File.dirname(__FILE__), "fixtures/response.txt")))
+      Maxmind.license_key = 'LICENSE_KEY'
+      request = Maxmind::Request.new(REQUIRED_FIELDS.merge(RECOMMENDED_FIELDS).merge(OPTIONAL_FIELDS))     
+      FakeWeb.register_uri(:post, "https://minfraud1.maxmind.com/app/ccv2r", :body => File.read(File.join(File.dirname(__FILE__), "fixtures/response.txt")))
       
-      @response = Maxmind::Response.new(request.query) 
+      @response = request.process!
     end
     
     should "require a response" do

@@ -121,6 +121,7 @@ module Maxmind
       req.set_form_data(query_params)
       h = Net::HTTP.new(url.host, url.port)
       h.use_ssl = true
+      h.verify_mode = OpenSSL::SSL::VERIFY_NONE
       response = h.start { |http| http.request(req) }
       response.body
       

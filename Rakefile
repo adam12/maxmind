@@ -4,11 +4,19 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "hackedunit-maxmind"
-    gem.summary = "MaxMind Minfraud using Net::HTTP"
-    gem.email = "tinu@tinucleatus.com"
-    gem.homepage = "http://github.com/hackedunit/maxmind"
-    gem.authors = ["Adam Daniels", "Tinu Cleatus"]
+    gem.name = "maxmind-rb"
+    gem.summary = "Wrapper for MaxMind's minFraud service"
+    gem.description = <<-EOF
+A wrapper around MaxMind's minFraud anti-fraud service. 
+
+http://www.maxmind.com/app/ccv_overview
+    EOF
+    gem.email = "tm@iprog.com"
+    gem.homepage = "http://github.com/zarqman/maxmind"
+    gem.authors = ["Adam Daniels", "Tinu Cleatus", 't.e.morgan']
+    gem.add_dependency 'activesupport', '>= 2.3'
+    gem.add_development_dependency('shoulda')
+    gem.add_development_dependency('matchy')
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
@@ -49,7 +57,7 @@ Rake::RDocTask.new do |rdoc|
   end
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "maxmind #{version}"
+  rdoc.title = "maxmind-rb #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end

@@ -4,19 +4,19 @@ maxmind
 Interfaces with Maxmind's minFraud anti-fraud service.
 
 Installation
-------------
-	gem install adam12-maxmind --source=http://gems.github.com
+----------------
+	gem install maxmind
 	
 
 Dependencies
-------------
+---------------------
 * [httparty](http://github.com/jnunemaker/httparty/)
 * [shoulda](http://github.com/thoughtbot/shoulda/) (used in tests only)
 * [matchy](http://github.com/jeremymcanally/matchy/) (used in tests only)
 
 
 Usage
------
+---------
 
 ### Minimum Required ###
 These are the only required fields to acquire a response from Maxmind.
@@ -84,10 +84,14 @@ Also see examples/example.rb
 
 
 Reference
----------
+--------------
 [minFraud API Reference](http://www.maxmind.com/app/ccv)
 
+Notable Forks
+--------------------
+[hackedunit/maxmind](http://github.com/hackedunit/maxmind)
+[maxmind-rb](http://github.com/zarqman/maxmind)
 
 Copyright
----------
-Copyright (c) 2009 Adam. See LICENSE for details.
+-------------
+Copyright (c) 2009 Adam Daniels. See LICENSE for details.

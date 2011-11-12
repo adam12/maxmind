@@ -22,10 +22,17 @@ Tests
 
 Dependencies
 ------------
-* active_support
-* rspec
-* mocha
+A `Gemfile` pointing to `gemspec` has been added so that bundler can be used to update dependencies. Just run
 
+    bundler install
+
+Running Tests
+-------------
+
+Run `bundle install` to make sure you have all the dependencies. In some cases it may be necessary to install
+ActiveSupport by hand, `gem install activesupport`. Once that's done, run:
+
+    rake test
 
 Usage
 -----

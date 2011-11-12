@@ -16,7 +16,7 @@ describe Maxmind::Response do
     all_fields = required_fields.merge(recommended_fields).merge(optional_fields)
 
     request = Maxmind::Request.new(all_fields)
-    stub_request(:post, "https://minfraud2.maxmind.com/app/ccv2r").
+    stub_request(:post, "https://minfraud.maxmind.com/app/ccv2r").
       to_return(:body => load_fixture("response.txt"), :status => 200)
     @response = request.process!
   end

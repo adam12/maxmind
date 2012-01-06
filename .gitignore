@@ -5,3 +5,4 @@ rdoc
 pkg
 Gemfile.lock
 .rvmrc
+*.sublime*

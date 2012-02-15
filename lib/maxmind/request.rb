@@ -3,6 +3,8 @@ module Maxmind
   class << self
     attr_accessor :license_key
   end
+	
+  SERVERS = %w(minfraud.maxmind.com minfraud-us-east.maxmind.com minfraud-us-west.maxmind.com)
 
   class Request
     # optionally set a default request type (one of 'standard' or 'premium')
@@ -119,13 +121,7 @@ module Maxmind
     # Upon a failure at the first URL, will automatically retry with the
     # second & third ones before finally raising an exception
     def post(query_params)
-
-      servers ||= %w(
-        https://minfraud2.maxmind.com/app/ccv2r
-        https://minfraud1.maxmind.com/app/ccv2r
-        https://minfraud3.maxmind.com/app/ccv2r
-      )
-
+      servers ||= SERVERS.map{|hostname| "https://#{hostname}/app/ccv2r"}
       url = URI.parse(servers.shift)
 
       # req = Net::HTTP::Get.new("#{url.path}?#{query_string}")

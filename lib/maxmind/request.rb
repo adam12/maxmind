@@ -115,7 +115,7 @@ module Maxmind
       }
 
       field_set = required_fields.merge(optional_fields)
-      field_set.reject {|k, v| v.nil? }#.to_query
+      field_set.reject {|k, v| v.nil? }
     end
 
     # Upon a failure at the first URL, will automatically retry with the
@@ -123,9 +123,8 @@ module Maxmind
     def post(query_params)
       servers ||= SERVERS.map{|hostname| "https://#{hostname}/app/ccv2r"}
       url = URI.parse(servers.shift)
-
-      # req = Net::HTTP::Get.new("#{url.path}?#{query_string}")
-      req = Net::HTTP::Post.new("#{url.path}")
+      
+      req = Net::HTTP::Post.new(url.path)
       req.set_form_data(query_params)
       h = Net::HTTP.new(url.host, url.port)
       h.use_ssl = true
@@ -137,9 +136,7 @@ module Maxmind
       retry if servers.size > 0
       raise e
     end
-
-
-
+    
     protected
     def validate
       raise ArgumentError, 'License key is required' unless Maxmind::license_key

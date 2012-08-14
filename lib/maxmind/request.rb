@@ -19,7 +19,8 @@ module Maxmind
     attr_accessor :domain, :bin, :bin_name, :bin_phone, :cust_phone, :request_type,
       :forwarded_ip, :email, :username, :password, :transaction_id, :session_id,
       :shipping_address, :shipping_city, :shipping_region, :shipping_postal,
-      :shipping_country, :user_agent, :accept_language
+      :shipping_country, :user_agent, :accept_language, :order_amount,
+      :order_currency
 
     def initialize(attrs={})
       self.attributes = attrs

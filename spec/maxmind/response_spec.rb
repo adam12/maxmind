@@ -1,10 +1,10 @@
-require 'test_helper'
+require 'spec_helper'
 
 REQUIRED_FIELDS = {
-  :client_ip => '24.24.24.24', 
-  :city => 'New York', 
-  :region => 'NY', 
-  :postal => '11434', 
+  :client_ip => '24.24.24.24',
+  :city => 'New York',
+  :region => 'NY',
+  :postal => '11434',
   :country => 'US'
 }
 
@@ -33,98 +33,98 @@ OPTIONAL_FIELDS = {
   :accept_language => 'en-us'
 }
 
-class MaxmindTest < Test::Unit::TestCase
+describe Maxmind::Responde < Test::Unit::TestCase
   context "New Request object" do
-    setup do
+    before do
       Maxmind.license_key = 'key'
       @request = Maxmind::Request.new(REQUIRED_FIELDS)
     end
-    
-    should "require a key" do
+
+    it "requires a key" do
       Maxmind.license_key = nil
       lambda { @request.send(:validate) }.should raise_error(ArgumentError)
       Maxmind.license_key = 'key'
     end
-    
-    should "require client IP" do
+
+    it "requires client IP" do
       lambda { @request.client_ip = nil; @request.send(:validate) }.should raise_error(ArgumentError)
     end
-    
-    should "require city" do
+
+    it "requires city" do
       lambda { @request.city = nil; @request.send(:validate) }.should raise_error(ArgumentError)
     end
-    
-    should "require region" do
+
+    it "requires region" do
       lambda { @request.region = nil; @request.send(:validate) }.should raise_error(ArgumentError)
     end
-    
-    should "require postal" do
+
+    it "requires postal" do
       lambda { @request.postal = nil; @request.send(:validate) }.should raise_error(ArgumentError)
     end
-    
-    should "require country" do
+
+    it "requires country" do
       lambda { @request.country = nil; @request.send(:validate) }.should raise_error(ArgumentError)
     end
-    
-    should "convert username to MD5" do
+
+    it "converts username to MD5" do
       @request.username = 'testuser'
       @request.username.should == '5d9c68c6c50ed3d02a2fcf54f63993b6'
     end
-    
-    should "convert password to MD5" do
+
+    it "converts password to MD5" do
       @request.password = 'testpassword'
       @request.password.should == 'e16b2ab8d12314bf4efbd6203906ea6c'
     end
-    
-    should "convert email to MD5" do
+
+    it "converts email to MD5" do
       @request.email = 'test@test.com'
       @request.email.should == 'b642b4217b34b1e8d3bd915fc65c4452'
     end
   end
-  
+
   #context "Requesting" do
   #  setup do
   #    request = Maxmind::Request.new('LICENSE_KEY', REQUIRED_FIELDS.merge(RECOMMENDED_FIELDS).merge(OPTIONAL_FIELDS))
   #    FakeWeb.register_uri(:get, "http://minfraud3.maxmind.com/app/ccv2r?" + request.query(true), :string => File.read(File.join(File.dirname(__FILE__), "fixtures/basic.txt")))
-  #    
-  #    @response = Maxmind::Response.new(request) 
+  #
+  #    @response = Maxmind::Response.new(request)
   #  end
   #end
-  
+
   context "Response" do
-    setup do
+    before do
       Maxmind.license_key = 'LICENSE_KEY'
-      request = Maxmind::Request.new(REQUIRED_FIELDS.merge(RECOMMENDED_FIELDS).merge(OPTIONAL_FIELDS))     
+      request = Maxmind::Request.new(REQUIRED_FIELDS.merge(RECOMMENDED_FIELDS).merge(OPTIONAL_FIELDS))
       FakeWeb.register_uri(:post, "https://minfraud1.maxmind.com/app/ccv2r", :body => File.read(File.join(File.dirname(__FILE__), "fixtures/response.txt")))
-      
+
       @response = request.process!
     end
-    
-    should "require a response" do
+
+    it "requires a response" do
       lambda { Maxmind::Response.new }.should raise_error(ArgumentError)
     end
-    
-    should "have a distance" do
+
+    it "has a distance" do
       @response.distance.should == 329
     end
-    
-    should "have a maxmind ID" do
+
+    it "has a maxmind ID" do
       @response.maxmind_id.should == '9VSOSDE2'
     end
-    
-    should "have a risk score" do
+
+    it "has a risk score" do
       @response.risk_score.should == 2.0
     end
-    
-    should "have a score" do
+
+    it "has a score" do
       @response.score.should == 7.66
     end
-    
-    should "have queries remaining" do
+
+    it "has queries remaining" do
       @response.queries_remaining.should == 955
     end
-    
-    should "have an explanation" do
+
+    it "has an explanation" do
       @response.explanation.should_not == nil
     end
   end

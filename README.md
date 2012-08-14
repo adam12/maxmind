@@ -3,16 +3,19 @@ maxmind-rb
 
 A wrapper around MaxMind's minFraud anti-fraud service.
 
+This is a rewrite of earlier maxmind wrappers. Works with Ruby 1.9
+
 Installation
 ------------
-	sudo gem install maxmind-rb
-	
+
+	TBD
+
 
 Dependencies
 ------------
 * active_support
-* [shoulda](http://github.com/thoughtbot/shoulda/) (used in tests only)
-* [matchy](http://github.com/jeremymcanally/matchy/) (used in tests only)
+* rspec
+* mocha
 
 
 Usage
@@ -20,7 +23,7 @@ Usage
 
 ### Minimum Required ###
 These are the only required fields to acquire a response from MaxMind.
-  
+
     require 'maxmind'
     Maxmind.license_key = 'LICENSE_KEY'
     request = Maxmind::Request.new(
@@ -30,7 +33,7 @@ These are the only required fields to acquire a response from MaxMind.
       :postal	=> '11434',
       :country => 'US'
     )
-		
+
 	  response = request.process!
 
 
@@ -53,7 +56,7 @@ fields here are optional and can be all or none.
       :username => 'test_carder_username',
       :password => 'test_carder_password'
     )
-	
+
 	  response = request.process!
 
 ### Thorough ###
@@ -87,7 +90,7 @@ This is every field available.
       :user_agent => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_5; en-us) AppleWebKit/525.18 (KHTML, like Gecko) Version/3.1.2 Safari/525.20.1',
       :accept_language => 'en-us'
     )
-		
+
 	  response = request.process!
 
 
@@ -101,6 +104,6 @@ Reference
 
 Copyright
 ---------
-Copyright (c) 2009 Adam. 
-Copyright (c) 2010 t.e.morgan. 
+Copyright (c) 2009 Adam.
+Copyright (c) 2010 t.e.morgan.
 See LICENSE for details.

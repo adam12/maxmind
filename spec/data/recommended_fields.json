@@ -1,0 +1,8 @@
+{
+  "domain": "yahoo.com",
+  "bin": "549099",
+  "forwarded_ip": "24.24.24.25",
+  "email": "test@test.com",
+  "username": "test_carder_username",
+  "password": "test_carder_password"
+}

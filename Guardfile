@@ -1,0 +1,6 @@
+guard 'rspec', :version => 2, :cli => '--color --format doc' do
+  watch(%r{^spec/.+_spec\.rb$})
+  watch(%r{^lib/(.+)\.rb$}) { |m| "spec/#{m[1]}_spec.rb" }
+  watch('lib/eventricle.rb') { "spec/eventricle.rb" }
+  watch('spec/spec_helper.rb') { "spec" }
+end

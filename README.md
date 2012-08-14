@@ -105,6 +105,12 @@ This is every field available.
 
 Also see examples/example.rb
 
+TODO
+----
+
+The specs have been updated from earlier versions, but still aren't comprehensive.
+
+Eg, it would be nice to test that server failover actually works.
 
 Reference
 ---------

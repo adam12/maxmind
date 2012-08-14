@@ -25,6 +25,10 @@ describe Maxmind::Response do
     expect { Maxmind::Response.new }.to raise_exception(ArgumentError)
   end
 
+  it "exposes its attributes" do
+    @response.attributes.should be_a Hash
+  end
+
   it "has a distance" do
     @response.distance.should == 329
   end

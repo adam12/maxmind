@@ -1,5 +1,6 @@
 # require 'rubygems'
 require 'active_support'
+require 'active_support/core_ext/hash'
 require 'net/http'
 require 'net/https'
 require 'uri'

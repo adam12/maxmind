@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    maxmind-rb (0.5.0a)
+    maxmind (0.5.0a)
       activesupport (~> 3.2.2)
 
 GEM
@@ -44,7 +44,7 @@ DEPENDENCIES
   growl (~> 1.0.3)
   guard (~> 0.8.8)
   guard-rspec (~> 0.5.4)
-  maxmind-rb!
+  maxmind!
   mocha (~> 0.10.5)
   rb-fsevent (~> 0.9)
   rspec (~> 2.9.0)

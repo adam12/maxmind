@@ -1,15 +1,24 @@
-maxmind-rb
+maxmind
 ==========
 
 A wrapper around MaxMind's minFraud anti-fraud service.
 
-This is a rewrite of earlier maxmind wrappers. Works with Ruby 1.9
+This re-jigs earlier maxmind wrappers to use up-to-date test gems.
+
+It now works with Ruby 1.9
 
 Installation
 ------------
 
-	TBD
+In your Gemfile;
 
+    gem 'maxmind', :git => 'git://github.com/tomblomfield/maxmind'
+
+Tests
+------------
+
+    bundle install
+    guard
 
 Dependencies
 ------------
@@ -100,7 +109,6 @@ Also see examples/example.rb
 Reference
 ---------
 [minFraud API Reference](http://www.maxmind.com/app/ccv)
-
 
 Copyright
 ---------

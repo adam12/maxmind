@@ -11,7 +11,6 @@ module Maxmind
 
     def initialize(response = nil)
       raise ArgumentError, 'Missing response string' unless response
-
       parse(response)
       @attributes = attributes_from_response
     end

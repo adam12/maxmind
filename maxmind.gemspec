@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'mocha', '~> 0.10.5'
   gem.add_development_dependency 'webmock', '~> 1.8.8'
 
-  gem.name = 'maxmind-rb'
+  gem.name = 'maxmind'
   gem.summary = "A wrapper around MaxMind's minFraud anti-fraud service."
   gem.version = Maxmind::VERSION.dup
   gem.authors = ['Tom Blomfield', 'Adam Daniels', 'Tinu Cleatus', 't.e.morgan']

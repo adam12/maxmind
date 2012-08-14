@@ -115,9 +115,16 @@ module Maxmind
       field_set.reject {|k, v| v.nil? }#.to_query
     end
 
-    # Upon a failure at the first URL, will automatically retry with the second one before finally raising an exception
+    # Upon a failure at the first URL, will automatically retry with the
+    # second & third ones before finally raising an exception
     def post(query_params)
-      servers ||= ["https://minfraud1.maxmind.com/app/ccv2r", "https://minfraud3.maxmind.com/app/ccv2r"]
+
+      servers ||= %w(
+        https://minfraud2.maxmind.com/app/ccv2r
+        https://minfraud1.maxmind.com/app/ccv2r
+        https://minfraud3.maxmind.com/app/ccv2r
+      )
+
       url = URI.parse(servers.shift)
 
       # req = Net::HTTP::Get.new("#{url.path}?#{query_string}")

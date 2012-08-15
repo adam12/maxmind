@@ -8,30 +8,18 @@ Gem::Specification.new do |s|
   s.version = "0.4.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Adam Daniels", "Tinu Cleatus", "t.e.morgan"]
+  s.authors = ["Adam Daniels", "Tinu Cleatus", "t.e.morgan", "Sam Oliver"]
   s.date = "2012-01-06"
   s.description = "A wrapper around MaxMind's minFraud anti-fraud service. \n\nhttp://www.maxmind.com/app/ccv_overview\n"
-  s.email = "tm@iprog.com"
+  s.email = "sam@samoliver.com"
   s.extra_rdoc_files = [
     "LICENSE",
-    "README.markdown"
+    "README.md"
   ]
-  s.files = [
-    ".document",
-    "Gemfile",
-    "LICENSE",
-    "README.markdown",
-    "Rakefile",
-    "VERSION",
-    "examples/example.rb",
-    "lib/maxmind.rb",
-    "lib/maxmind/request.rb",
-    "lib/maxmind/response.rb",
-    "test/fixtures/response.txt",
-    "test/maxmind_test.rb",
-    "test/test_helper.rb"
-  ]
-  s.homepage = "http://github.com/zarqman/maxmind"
+  
+  s.files         = `git ls-files`.split("\n")
+  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.homepage = "http://github.com/samoli/maxmind"
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.11"
   s.summary = "Wrapper for MaxMind's minFraud service"

@@ -117,13 +117,13 @@ Reference
 
 Contributors
 ------------
-Sam Oliver <sam@samoliver.com>
-Nick Wilson <nick@di.fm>
-Wolfram Arnold <wolfram@rubyfocus.biz>
-Jonathan Lim <snowblink@gmail.com>
-Tom Blomfield
-Thomas Morgan
-Tinu Cleatus <tinu.cleatus@me.com>
+* Sam Oliver <sam@samoliver.com>
+* Nick Wilson <nick@di.fm>
+* Wolfram Arnold <wolfram@rubyfocus.biz>
+* Jonathan Lim <snowblink@gmail.com>
+* Tom Blomfield
+* Thomas Morgan
+* Tinu Cleatus <tinu.cleatus@me.com>
 
 Thanks to all :)
 

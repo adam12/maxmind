@@ -13,6 +13,7 @@ module Maxmind
     #   Maxmind's default behavior is to use premium if you have credits, else use standard
     class << self
       attr_accessor :default_request_type
+      attr_accessor :timeout
     end
 
 
@@ -135,8 +136,8 @@ module Maxmind
       
       # set some timeouts
       h.open_timeout  = 60 # this blocks forever by default, lets be a bit less crazy.
-      h.read_timeout  = @@timeout || DefaultTimeout
-      h.ssl_timeout   = @@timeout || DefaultTimeout
+      h.read_timeout  = self.class.timeout || DefaultTimeout
+      h.ssl_timeout   = self.class.timeout || DefaultTimeout
 
       response = h.start { |http| http.request(req) }
       response.body

@@ -1,3 +1,3 @@
 module Maxmind
-  VERSION = '0.5.0a'.freeze
+  VERSION = '0.4.2'
 end

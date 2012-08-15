@@ -22,7 +22,7 @@ optional_fields = {
   :bin_name => 'MBNA America Bank',
   :bin_phone => '800-421-2110',
   :cust_phone => '212-242',
-  :requested_type => 'premium',
+  :request_type => 'premium',
   :shipping_address => '145-50 157th Street',
   :shipping_city => 'Jamaica',
   :shipping_region => 'NY',
@@ -34,6 +34,8 @@ optional_fields = {
   :accept_language => 'en-us'
 }
 
-request = Maxmind::Request.new('LICENSE_KEY', required_fields.merge(recommended_fields).merge(optional_fields))
-response = Maxmind::Response.new(request.query)
+Maxmind.license_key = 'LICENSE_KEY'
+Maxmind::Request.default_request_type = 'standard'
+request = Maxmind::Request.new(required_fields.merge(recommended_fields).merge(optional_fields))
+response = request.process!
 pp response

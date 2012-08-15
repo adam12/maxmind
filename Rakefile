@@ -1,20 +1,9 @@
-require 'rubygems'
-require 'rake'
+require 'rspec/core/rake_task'
 
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name = "maxmind"
-    gem.summary = %Q{TODO}
-    gem.email = "adam@mediadrive.ca"
-    gem.homepage = "http://github.com/adam12/maxmind"
-    gem.authors = ["Adam Daniels"]
-    gem.add_dependency 'httparty'
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
-  end
-
-rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
+desc "Run the test suite"
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.pattern = FileList['spec/**/*_spec.rb']
+  t.rspec_opts = %w(--color --format doc)
 end
 
 require 'rake/testtask'
@@ -40,18 +29,12 @@ end
 
 task :default => :test
 
-require 'rake/rdoctask'
+require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
-  if File.exist?('VERSION.yml')
-    config = YAML.load(File.read('VERSION.yml'))
-    version = "#{config[:major]}.#{config[:minor]}.#{config[:patch]}"
-  else
-    version = ""
-  end
+  version = File.read 'VERSION' rescue nil
 
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "maxmind #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
-

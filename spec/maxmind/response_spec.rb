@@ -52,4 +52,21 @@ describe Maxmind::Response do
   it "has an explanation" do
     @response.explanation.should_not == nil
   end
+
+  it "has a country match" do
+    @response.country_match.should_not == nil
+  end
+
+  it "has a boolean country match" do
+    @response.country_match.should_not == "Yes"
+    @response.country_match.should == true
+  end
+
+  it "has a phone in billing location" do
+    @response.phone_in_billing_location.should == false
+  end
+
+  it "has a phone in billing location ? method" do
+    @response.phone_in_billing_location?.should == false
+  end
 end

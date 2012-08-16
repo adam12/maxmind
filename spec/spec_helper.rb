@@ -1,4 +1,4 @@
-require 'mocha'
+require 'mocha_standalone'
 require 'maxmind'
 require 'json'
 require 'webmock/rspec'

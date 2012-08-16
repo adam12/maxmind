@@ -3,9 +3,6 @@ maxmind
 
 A wrapper around MaxMind's minFraud anti-fraud service.
 
-This re-jigs earlier maxmind wrappers to use up-to-date test gems.
-
-It now works with Ruby 1.9
 
 Installation
 ------------
@@ -22,15 +19,13 @@ Tests
 
 Dependencies
 ------------
-A `Gemfile` pointing to `gemspec` has been added so that bundler can be used to update dependencies. Just run
 
-    bundler install
+    bundle install
 
 Running Tests
 -------------
 
-Run `bundle install` to make sure you have all the dependencies. In some cases it may be necessary to install
-ActiveSupport by hand, `gem install activesupport`. Once that's done, run:
+Run `bundle install` to make sure you have all the dependencies. Once that's done, run:
 
     rake test
 
@@ -114,17 +109,26 @@ Also see examples/example.rb
 
 TODO
 ----
-
-The specs have been updated from earlier versions, but still aren't comprehensive.
-
-Eg, it would be nice to test that server failover actually works.
+* Improve specs (eg, test server failover)
 
 Reference
 ---------
 [minFraud API Reference](http://www.maxmind.com/app/ccv)
 
+Contributors
+------------
+Sam Oliver <sam@samoliver.com>
+Nick Wilson <nick@di.fm>
+Wolfram Arnold <wolfram@rubyfocus.biz>
+Jonathan Lim <snowblink@gmail.com>
+Tom Blomfield
+Thomas Morgan
+Tinu Cleatus <tinu.cleatus@me.com>
+
+Thanks to all :)
+
 Copyright
 ---------
-Copyright (c) 2009 Adam.
-Copyright (c) 2010 t.e.morgan.
+Copyright (c) 2009 Adam Daniels <adam@mediadrive.ca>.
+
 See LICENSE for details.

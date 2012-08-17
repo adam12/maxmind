@@ -51,16 +51,16 @@ module Maxmind
     # customer email ... sends just an MD5 hash of the email.
     # also sets the email domain at the same time.
     def email=(email)
-      @email = Digest::MD5.hexdigest(email.downcase)
+      @email = md5_digest(email)
       self.domain = email unless domain
     end
 
     def username=(username)
-      @username = Digest::MD5.hexdigest(username.downcase)
+      @username = md5_digest(username)
     end
 
     def password=(password)
-      @password = Digest::MD5.hexdigest(password.downcase)
+      @password = md5_digest(password)
     end
 
     # if a full card number is passed, grab just the first 6 digits (which is the bank id number)
@@ -145,6 +145,14 @@ module Maxmind
     rescue Exception => e
       retry if servers.size > 0
       raise e
+    end
+
+    def md5_digest(value)
+      if value =~ /^[0-9a-f]{32}$/i
+        value
+      else
+        Digest::MD5.hexdigest(value.downcase)
+      end
     end
     
     protected

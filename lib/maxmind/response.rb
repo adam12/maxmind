@@ -6,7 +6,8 @@ module Maxmind
       'custPhoneInBillingLoc' => 'phone_in_billing_location',
       'maxmindID' => 'maxmind_id',
       'isTransProxy' => 'is_transparent_proxy',
-      'err' => 'error'
+      'err' => 'error',
+      'carderEmail' => 'high_risk_email'
     }
 
     def initialize(response = nil)

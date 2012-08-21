@@ -69,4 +69,8 @@ describe Maxmind::Response do
   it "has a phone in billing location ? method" do
     @response.phone_in_billing_location?.should == false
   end
+
+  it "has a high risk email" do
+    @response.high_risk_email.should == true
+  end
 end

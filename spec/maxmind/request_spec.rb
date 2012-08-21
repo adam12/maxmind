@@ -47,4 +47,20 @@ describe Maxmind::Request do
     @request.email = 'test@test.com'
     @request.email.should == 'b642b4217b34b1e8d3bd915fc65c4452'
   end
+
+  it "does not double convert an md5 username" do
+    @request.username = 'b642b4217b34b1e8d3bd915fc65c4452'
+    @request.username.should == 'b642b4217b34b1e8d3bd915fc65c4452'
+  end
+
+  it "does not double convert an md5 password" do
+    @request.password = 'b642b4217b34b1e8d3bd915fc65c4452'
+    @request.password.should == 'b642b4217b34b1e8d3bd915fc65c4452'
+  end
+
+  it "does not double convert an md5 email" do
+    @request.email = 'b642b4217b34b1e8d3bd915fc65c4452'
+    @request.email.should == 'b642b4217b34b1e8d3bd915fc65c4452'
+  end
+
 end

@@ -114,7 +114,7 @@ module Maxmind
         :txnID            => @transaction_id,
         :sessionID        => @session_id,
         :user_agent       => @user_agent,
-        :accept_language  => @accept_langage,
+        :accept_language  => @accept_language,
         :avs_result       => @avs_result,
         :cvv_result       => @cvv_result,
         :txn_type         => @txn_type

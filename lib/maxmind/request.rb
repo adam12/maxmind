@@ -1,11 +1,4 @@
 module Maxmind
-  # Your license key
-  class << self
-    attr_accessor :license_key
-  end
-	
-  SERVERS = %w(minfraud.maxmind.com minfraud-us-east.maxmind.com minfraud-us-west.maxmind.com)
-
   class Request
     DefaultTimeout = 60
 

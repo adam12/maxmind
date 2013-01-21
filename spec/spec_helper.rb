@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'bundler/setup'
+
 require 'mocha_standalone'
 require 'maxmind'
 require 'json'

@@ -16,7 +16,6 @@ module Maxmind
       attr_accessor :timeout
     end
 
-
     # Required Fields
     attr_accessor :client_ip, :city, :region, :postal, :country
 
@@ -31,13 +30,11 @@ module Maxmind
       self.attributes = attrs
     end
 
-
     def attributes=(attrs={})
       attrs.each do |k, v|
         self.send("#{k}=", v)
       end
     end
-
 
     # email domain ... if a full email is provided, take just the domain portion
     def domain=(email)
@@ -68,9 +65,8 @@ module Maxmind
       @bin = bin ? bin[0,6] : nil
     end
 
-
     def process!
-      resp = post(query)
+      resp = post(query).encode("utf-8", "iso-8859-1")
       Maxmind::Response.new(resp)
     end
 
@@ -79,7 +75,6 @@ module Maxmind
     rescue Exception => e
       false
     end
-
 
     private
 

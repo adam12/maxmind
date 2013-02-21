@@ -14,10 +14,11 @@ describe Maxmind::Response do
     recommended_fields = JSON.parse(load_fixture("recommended_fields.json"))
     optional_fields = JSON.parse(load_fixture("optional_fields.json"))
     all_fields = required_fields.merge(recommended_fields).merge(optional_fields)
+    @response_body = load_fixture("response.txt")
 
     request = Maxmind::Request.new(all_fields)
     stub_request(:post, "https://minfraud.maxmind.com/app/ccv2r").
-      to_return(:body => load_fixture("response.txt"), :status => 200)
+      to_return(:body => @response_body, :status => 200)
     @response = request.process!
   end
 
@@ -27,6 +28,10 @@ describe Maxmind::Response do
 
   it "exposes its attributes" do
     @response.attributes.should be_a Hash
+  end
+  
+  it "exposes the raw response body" do
+    @response.body.should == @response_body.encode("utf-8", "iso-8859-1")
   end
 
   it "has a distance" do

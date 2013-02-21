@@ -1,6 +1,7 @@
 module Maxmind
   class Response
     attr_accessor :attributes
+    attr_reader :body
 
     ATTRIBUTE_MAP = {
       'custPhoneInBillingLoc' => 'phone_in_billing_location',
@@ -12,6 +13,7 @@ module Maxmind
 
     def initialize(response = nil)
       raise ArgumentError, 'Missing response string' unless response
+      @body = response
       @attributes = {}
       parse(response)
     end

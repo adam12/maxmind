@@ -69,8 +69,6 @@ module Maxmind
       false
     end
 
-    private
-
     def query
       validate
 
@@ -111,6 +109,8 @@ module Maxmind
       field_set = required_fields.merge(optional_fields)
       field_set.reject {|k, v| v.nil? }
     end
+
+    private
 
     # Upon a failure at the first URL, will automatically retry with the
     # second & third ones before finally raising an exception

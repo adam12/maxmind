@@ -34,6 +34,10 @@ describe Maxmind::Response do
     @response.body.should == @response_body.encode("utf-8", "iso-8859-1")
   end
 
+  it "exposes the http response code" do
+    @response.http_code.should == 200
+  end
+
   it "has a distance" do
     @response.distance.should == 329
   end

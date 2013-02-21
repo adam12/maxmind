@@ -50,7 +50,7 @@ describe Maxmind::Response do
   end
 
   it "has an explanation" do
-    @response.explanation.should_not == nil
+    @response.explanation.should be_a String
   end
 
   it "has a country match" do

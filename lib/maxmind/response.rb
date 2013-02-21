@@ -65,9 +65,9 @@ module Maxmind
       v = Integer(v) rescue Float(v) rescue v;
 
       case v
-      when /[Yy]es/
+      when 'Yes', 'yes'
         attributes[k] = true
-      when /[Nn]o/
+      when 'No', 'no'
         attributes[k] = false
       else
         attributes[k] = v

@@ -1,6 +1,7 @@
 module Maxmind
   class Response
     attr_accessor :attributes
+    attr_reader :body, :http_code
 
     ATTRIBUTE_MAP = {
       'custPhoneInBillingLoc' => 'phone_in_billing_location',
@@ -10,8 +11,10 @@ module Maxmind
       'carderEmail' => 'high_risk_email'
     }
 
-    def initialize(response = nil)
+    def initialize(response = nil, http_code = nil)
       raise ArgumentError, 'Missing response string' unless response
+      @body = response
+      @http_code = http_code.to_i if http_code
       @attributes = {}
       parse(response)
     end
@@ -65,9 +68,9 @@ module Maxmind
       v = Integer(v) rescue Float(v) rescue v;
 
       case v
-      when /[Yy]es/
+      when 'Yes', 'yes'
         attributes[k] = true
-      when /[Nn]o/
+      when 'No', 'no'
         attributes[k] = false
       else
         attributes[k] = v

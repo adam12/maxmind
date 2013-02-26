@@ -59,8 +59,8 @@ module Maxmind
     end
 
     def process!
-      resp = post(query).encode("utf-8", "iso-8859-1")
-      Maxmind::Response.new(resp)
+      resp = post(query)
+      Maxmind::Response.new(resp.body.encode("utf-8", "iso-8859-1"), resp.code)
     end
 
     def process
@@ -68,8 +68,6 @@ module Maxmind
     rescue Exception => e
       false
     end
-
-    private
 
     def query
       validate
@@ -112,8 +110,11 @@ module Maxmind
       field_set.reject {|k, v| v.nil? }
     end
 
+    private
+
     # Upon a failure at the first URL, will automatically retry with the
     # second & third ones before finally raising an exception
+    # Returns an HTTPResponse object
     def post(query_params)
       servers ||= SERVERS.map{|hostname| "https://#{hostname}/app/ccv2r"}
       url = URI.parse(servers.shift)
@@ -130,8 +131,7 @@ module Maxmind
       h.read_timeout  = self.class.timeout || DefaultTimeout
       h.ssl_timeout   = self.class.timeout || DefaultTimeout
 
-      response = h.start { |http| http.request(req) }
-      response.body
+      h.start { |http| http.request(req) }
 
     rescue Exception => e
       retry if servers.size > 0

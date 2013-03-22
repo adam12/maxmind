@@ -38,8 +38,8 @@ module Maxmind
     end
 
     def method_missing(meth, *args)
-      if meth.to_s[-1] == '?'
-        send(meth[0..-2])
+      if meth.to_s[-1, 1] == '?'
+        send(meth.to_s[0..-2])
       elsif attributes.has_key?(meth)
         attributes[meth]
       else
@@ -48,7 +48,7 @@ module Maxmind
     end
 
     def respond_to?(meth)
-      if meth.to_s[-1] == '?'
+      if meth.to_s[-1, 1] == '?'
         respond_to? meth[0..-2]
       else
         super

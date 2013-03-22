@@ -103,7 +103,8 @@ module Maxmind
         :accept_language  => @accept_language,
         :avs_result       => @avs_result,
         :cvv_result       => @cvv_result,
-        :txn_type         => @txn_type
+        :txn_type         => @txn_type,
+        :order_amount     => @order_amount
       }
 
       field_set = required_fields.merge(optional_fields)

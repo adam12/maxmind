@@ -1,11 +1,5 @@
 require 'spec_helper'
 
-REQUIRED_FIELDS =
-
-RECOMMENDED_FIELDS =
-
-OPTIONAL_FIELDS =
-
 describe Maxmind::Response do
   before do
     Maxmind.license_key = 'LICENSE_KEY'

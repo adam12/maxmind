@@ -10,7 +10,7 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     # Disable all live HTTP requests
-    WebMock.disable_net_connect!(allow_localhost: true)
+    WebMock.disable_net_connect!(:allow_localhost => true)
   end
 
   config.mock_with :mocha

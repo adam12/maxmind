@@ -9,6 +9,7 @@ describe Maxmind::Response do
     optional_fields = JSON.parse(load_fixture("optional_fields.json"))
     all_fields = required_fields.merge(recommended_fields).merge(optional_fields)
     @response_body = load_fixture("response.txt")
+    @response_body.encode!("utf-8", "iso-8859-1") if @response_body.respond_to?('encode!')
 
     request = Maxmind::Request.new(all_fields)
     stub_request(:post, "https://minfraud.maxmind.com/app/ccv2r").
@@ -25,7 +26,7 @@ describe Maxmind::Response do
   end
   
   it "exposes the raw response body" do
-    @response.body.should == @response_body.encode("utf-8", "iso-8859-1")
+    @response.body.should == @response_body
   end
 
   it "exposes the http response code" do

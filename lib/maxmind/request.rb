@@ -60,8 +60,8 @@ module Maxmind
 
     def process!
       resp = post(query)
-      to_send = resp.body.respond_to?("encode") ? resp.body.encode("utf-8", "iso-8859-1") : resp.body
-      Maxmind::Response.new(to_send, resp.code)
+      resp.body.encode!("utf-8", "iso-8859-1") if resp.body.respond_to?(:encode!)
+      Maxmind::Response.new(resp.body, resp.code)
     end
 
     def process

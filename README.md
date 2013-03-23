@@ -104,9 +104,6 @@ This is every field available.
 
 	  response = request.process!
 
-
-Also see examples/example.rb
-
 TODO
 ----
 * Improve specs (eg, test server failover)
@@ -114,6 +111,48 @@ TODO
 Reference
 ---------
 [minFraud API Reference](http://www.maxmind.com/app/ccv)
+
+Also see examples/example.rb
+
+Chargeback Service
+------------------
+
+You can help improve the Minfraud service by reporting instances of fraud.  Only the IP address of a suspected fraudulent order is required, but you can pass additional information.  Note that your Maxmind User ID is required in addition to your license key.
+
+Chargeback Service Usage
+------------------------
+
+### Minimum Required ###
+These are the only required fields to acquire a response from MaxMind.
+
+    require 'maxmind'
+    Maxmind.license_key = 'LICENSE_KEY'
+    Maxmind.user_id     = 'MAXMIND_USER_ID'
+    request = Maxmind::ChargebackRequest.new(
+      :client_ip => '24.24.24.24'
+    )
+
+	  response = request.process!
+
+
+### Recommended ###
+For increased accuracy, these are the recommended fields to submit to MaxMind. The additional
+fields here are optional and can be all or none.
+
+    require 'maxmind'
+    Maxmind.license_key = 'LICENSE_KEY'
+    Maxmind.user_id     = 'MAXMIND_USER_ID'
+    request = Maxmind::ChargebackRequest.new(
+		  :client_ip       => '24.24.24.24',
+      :chargeback_code => 'Fraud',
+      :fraud_score     => 'suspected_fraud',
+      :maxmind_id      => 'KW36L83C',
+      :transaction_id  => '12345'
+    )
+
+	  response = request.process!
+
+[minFraud Chargeback reference](http://dev.maxmind.com/minfraud/chargeback)
 
 Contributors
 ------------
@@ -124,6 +163,7 @@ Contributors
 * Tom Blomfield
 * Thomas Morgan
 * Tinu Cleatus <tinu.cleatus@me.com>
+* Don Pflaster <dpflaster@gmail.com>
 
 Thanks to all :)
 

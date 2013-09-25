@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
 
-require 'mocha_standalone'
+require 'mocha/api'
 require 'maxmind'
 require 'json'
 require 'webmock/rspec'

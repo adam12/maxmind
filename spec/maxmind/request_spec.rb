@@ -62,7 +62,7 @@ describe Maxmind::Request do
     @request.email = 'b642b4217b34b1e8d3bd915fc65c4452'
     @request.email.should == 'b642b4217b34b1e8d3bd915fc65c4452'
   end
-  
+
   it "exposes the query parameters" do
     @request.query.should be_a Hash
   end

@@ -27,7 +27,7 @@ module Maxmind
 
     def process!
       resp = post(query)
-      Maxmind::ChargebackResponse.new(resp.message,resp.code)
+      Maxmind::ChargebackResponse.new(resp.message, resp.code)
     end
 
     def process
@@ -84,6 +84,7 @@ module Maxmind
     end
 
     protected
+
     def validate
       raise ArgumentError, 'License key is required' unless Maxmind::license_key
       raise ArgumentError, 'User ID is required' unless Maxmind::user_id

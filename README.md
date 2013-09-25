@@ -15,7 +15,7 @@ Tests
 ------------
 
     bundle install
-    guard
+    bundle exec guard
 
 Dependencies
 ------------
@@ -27,7 +27,7 @@ Running Tests
 
 Run `bundle install` to make sure you have all the dependencies. Once that's done, run:
 
-    rake test
+    rake spec
 
 Usage
 -----
@@ -143,14 +143,14 @@ fields here are optional and can be all or none.
     Maxmind.license_key = 'LICENSE_KEY'
     Maxmind.user_id     = 'MAXMIND_USER_ID'
     request = Maxmind::ChargebackRequest.new(
-		  :client_ip       => '24.24.24.24',
+      :client_ip       => '24.24.24.24',
       :chargeback_code => 'Fraud',
       :fraud_score     => 'suspected_fraud',
       :maxmind_id      => 'KW36L83C',
       :transaction_id  => '12345'
     )
 
-	  response = request.process!
+    response = request.process!
 
 [minFraud Chargeback reference](http://dev.maxmind.com/minfraud/chargeback)
 

@@ -14,23 +14,33 @@ describe Maxmind::Request do
   end
 
   it "requires client IP" do
-    expect { @request.client_ip = nil; @request.send(:validate) }.to raise_exception(ArgumentError)
+    expect {
+      @request.client_ip = nil; @request.send(:validate)
+    }.to raise_exception(ArgumentError)
   end
 
-  it "requires city" do
-    expect { @request.city = nil; @request.send(:validate) }.to raise_exception(ArgumentError)
+  it "doesn't require city" do
+    expect {
+      @request.city = nil; @request.send(:validate)
+    }.not_to raise_error
   end
 
-  it "requires region" do
-    expect { @request.region = nil; @request.send(:validate) }.to raise_exception(ArgumentError)
+  it "doesn't require region" do
+    expect {
+      @request.region = nil; @request.send(:validate)
+    }.not_to raise_error
   end
 
-  it "requires postal" do
-    expect { @request.postal = nil; @request.send(:validate) }.to raise_exception(ArgumentError)
+  it "doesn't require postal" do
+    expect {
+      @request.postal = nil; @request.send(:validate)
+    }.not_to raise_error
   end
 
-  it "requires country" do
-    expect { @request.country = nil; @request.send(:validate) }.to raise_exception(ArgumentError)
+  it "doesn't require country" do
+    expect {
+      @request.country = nil; @request.send(:validate)
+    }.not_to raise_error
   end
 
   it "converts username to MD5" do

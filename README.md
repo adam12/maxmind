@@ -38,11 +38,7 @@ These are the only required fields to acquire a response from MaxMind.
     require 'maxmind'
     Maxmind.license_key = 'LICENSE_KEY'
     request = Maxmind::Request.new(
-      :client_ip => '24.24.24.24',
-      :city => 'New York',
-      :region	=> 'NY',
-      :postal	=> '11434',
-      :country => 'US'
+      :client_ip => '24.24.24.24'
     )
 
 	  response = request.process!

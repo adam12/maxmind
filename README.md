@@ -1,8 +1,9 @@
 maxmind
 ==========
 
-A wrapper around MaxMind's minFraud anti-fraud service.
+An unofficial wrapper around MaxMind's minFraud anti-fraud service.
 
+For MaxMind's Proxy Detection Service, see this gem: [https://github.com/eric-smartlove/maxmind\_proxy\_detection](https://github.com/eric-smartlove/maxmind_proxy_detection)
 
 Installation
 ------------

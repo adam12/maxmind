@@ -160,6 +160,7 @@ Contributors
 * Thomas Morgan
 * Tinu Cleatus <tinu.cleatus@me.com>
 * Don Pflaster <dpflaster@gmail.com>
+* Igor Pstyga
 
 Thanks to all :)
 

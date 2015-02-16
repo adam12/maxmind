@@ -120,14 +120,14 @@ module Maxmind
     def post(query_params)
       servers ||= SERVERS.map{|hostname| "https://#{hostname}/app/ccv2r"}
       url = URI.parse(servers.shift)
-      
+
       req = Net::HTTP::Post.new(url.path)
       req.set_form_data(query_params)
 
       h = Net::HTTP.new(url.host, url.port)
       h.use_ssl = true
       h.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      
+
       # set some timeouts
       h.open_timeout  = 60 # this blocks forever by default, lets be a bit less crazy.
       h.read_timeout  = self.class.timeout || DefaultTimeout
@@ -147,15 +147,11 @@ module Maxmind
         Digest::MD5.hexdigest(value.downcase)
       end
     end
-    
+
     protected
     def validate
       raise ArgumentError, 'License key is required' unless Maxmind::license_key
       raise ArgumentError, 'IP address is required' unless client_ip
-      raise ArgumentError, 'City is required' unless city
-      raise ArgumentError, 'Region is required' unless region
-      raise ArgumentError, 'Postal code is required' unless postal
-      raise ArgumentError, 'Country is required' unless country
     end
   end
 end

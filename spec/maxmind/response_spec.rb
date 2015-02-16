@@ -22,59 +22,59 @@ describe Maxmind::Response do
   end
 
   it "exposes its attributes" do
-    @response.attributes.should be_a Hash
+    expect(@response.attributes).to be_a Hash
   end
-  
+
   it "exposes the raw response body" do
-    @response.body.should == @response_body
+    expect(@response.body).to eq @response_body
   end
 
   it "exposes the http response code" do
-    @response.http_code.should == 200
+    expect(@response.http_code).to eq 200
   end
 
   it "has a distance" do
-    @response.distance.should == 329
+    expect(@response.distance).to eq 329
   end
 
   it "has a maxmind ID" do
-    @response.maxmind_id.should == '9VSOSDE2'
+    expect(@response.maxmind_id).to eq '9VSOSDE2'
   end
 
   it "has a risk score" do
-    @response.risk_score.should == 2.0
+    expect(@response.risk_score).to eq 2.0
   end
 
   it "has a score" do
-    @response.score.should == 7.66
+    expect(@response.score).to eq 7.66
   end
 
   it "has queries remaining" do
-    @response.queries_remaining.should == 955
+    expect(@response.queries_remaining).to eq 955
   end
 
   it "has an explanation" do
-    @response.explanation.should be_a String
+    expect(@response.explanation).to be_a String
   end
 
   it "has a country match" do
-    @response.country_match.should_not == nil
+    expect(@response.country_match).not_to be_nil
   end
 
   it "has a boolean country match" do
-    @response.country_match.should_not == "Yes"
-    @response.country_match.should == true
+    expect(@response.country_match).not_to eq "Yes"
+    expect(@response.country_match).to be_truthy
   end
 
   it "has a phone in billing location" do
-    @response.phone_in_billing_location.should == false
+    expect(@response.phone_in_billing_location).to be_falsey
   end
 
   it "has a phone in billing location ? method" do
-    @response.phone_in_billing_location?.should == false
+    expect(@response.phone_in_billing_location?).to be_falsey
   end
 
   it "has a high risk email" do
-    @response.high_risk_email.should == true
+    expect(@response.high_risk_email).to be_truthy
   end
 end

@@ -43,6 +43,11 @@ describe Maxmind::Request do
     }.not_to raise_error
   end
 
+  it "saves order currency" do
+    @request.order_currency = 'GBP'
+    expect(@request.query[:order_currency]).to eq 'GBP'
+  end
+
   it "converts username to MD5" do
     @request.username = 'testuser'
     expect(@request.username).to eq '5d9c68c6c50ed3d02a2fcf54f63993b6'

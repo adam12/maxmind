@@ -105,7 +105,8 @@ module Maxmind
         :avs_result       => @avs_result,
         :cvv_result       => @cvv_result,
         :txn_type         => @txn_type,
-        :order_amount     => @order_amount
+        :order_amount     => @order_amount,
+        :order_currency   => @order_currency
       }
 
       field_set = required_fields.merge(optional_fields)

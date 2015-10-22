@@ -162,6 +162,7 @@ Contributors
 * Tinu Cleatus <tinu.cleatus@me.com>
 * Don Pflaster <dpflaster@gmail.com>
 * Igor Pstyga
+* Jack Kelly <jack@trikeapps.com>
 
 Thanks to all :)
 
